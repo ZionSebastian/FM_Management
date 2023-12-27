@@ -126,37 +126,44 @@ namespace FMGeneral
                     case "C_0_16":
                         string Dimension = _With_MHF1.GetValue("U_Dimnsn", pVal.Row-1 ).ToString().Trim();
 
-                        
-                        if (Dimension == "1")
-                        {
+                        oConditions = TConditions.Create("DimCode", "4", BoConditionOperation.co_EQUAL);
+                        TChooseFromList.SetCondition(pVal, form, oConditions);
 
-                            oConditions = TConditions.Create("DimCode", "1", BoConditionOperation.co_EQUAL);
-                            TChooseFromList.SetCondition(pVal, form, oConditions);
+                        //if (Dimension == "1")
+                        //{
 
-                        }
-                        else if (Dimension == "3")
-                        {
+                        //    oConditions = TConditions.Create("DimCode", "1", BoConditionOperation.co_EQUAL);
+                        //    TChooseFromList.SetCondition(pVal, form, oConditions);
 
-                            oConditions = TConditions.Create("DimCode", "3", BoConditionOperation.co_EQUAL);
-                            TChooseFromList.SetCondition(pVal, form, oConditions);
+                        //}
+                        //else if (Dimension == "3")
+                        //{
+
+                        //    oConditions = TConditions.Create("DimCode", "3", BoConditionOperation.co_EQUAL);
+                        //    TChooseFromList.SetCondition(pVal, form, oConditions);
 
 
-                        }
-                        else if (Dimension == "4")
-                        {
+                        //}
+                        //else if (Dimension == "4")
+                        //{
 
-                            oConditions = TConditions.Create("DimCode", "4", BoConditionOperation.co_EQUAL);
-                            TChooseFromList.SetCondition(pVal, form, oConditions);
-                        }
+                        //    oConditions = TConditions.Create("DimCode", "4", BoConditionOperation.co_EQUAL);
+                        //    TChooseFromList.SetCondition(pVal, form, oConditions);
+                        //}
                         break;
 
                     case "Col_3":
-                        
 
-                          
-                        
+                        oConditions = TConditions.Create("DimCode", "1", BoConditionOperation.co_EQUAL);
+                        TChooseFromList.SetCondition(pVal, form, oConditions);
+
+
                         break;
 
+                    //case "C_0_16":
+                    //    oConditions = TConditions.Create("DimCode", "4", BoConditionOperation.co_EQUAL);
+                    //    TChooseFromList.SetCondition(pVal, form, oConditions);
+                    //    break;
 
 
                 }
