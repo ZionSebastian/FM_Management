@@ -53,6 +53,8 @@ namespace FMGeneral
                    new B1DbColumn("@FM_OMHF", "APInvNum", "AP Invoice Num", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "WTCode", "WithHoldingTax Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "APInvDate", "AP Invoice Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_OMHF", "Month", "Month", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
 
                    new B1DbColumn("@FM_MHF1", "Date", "Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_MHF1", "Driver", "Driver", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),

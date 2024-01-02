@@ -87,9 +87,11 @@ namespace FMGeneral.Class_Files
                         string series = TUser.GetDefaultSeries("FM_MHF", SeriesReturnType.Series);
                         _withQAT.SetValue("Series", 0, TUser.GetDefaultSeries("FM_MHF", SeriesReturnType.Series));
                         _withQAT.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_MHF"))));
+
                         //_withQAT.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_MHF"));
                         //_withQAT.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_MHF"))));
                         _withQAT.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+                        _withQAT.SetValue("U_APInvDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
 
                         TMatrix.addRow(_form, "0_U_G", "#", "@FM_MHF1");
                         TMatrix.RefreshRowNo(_form, "0_U_G", "#");
@@ -100,6 +102,8 @@ namespace FMGeneral.Class_Files
 
                         _form.Items.Item("btnInvGen").Enabled = false;
 
+                        string month = TSQL.GetSingleRecord("select Month(GETDATE())");
+                        _withQAT.SetValue("U_Month", 0, month);
                         _form.Items.Item("txtSpCode").Click(BoCellClickType.ct_Regular);
                         break;
                     #endregion

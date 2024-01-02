@@ -90,9 +90,11 @@
     <Compile Include="Button__FM_PRD__1.cs" />
     <Compile Include="Class Files\clsFMGeneral.cs" />
     <Compile Include="Class Files\globalvariables.cs" />
+    <Compile Include="ComboBox__FM_MHF__cmbMonth.cs" />
     <Compile Include="EditText__140__txtEPE.cs" />
     <Compile Include="EditText__42__txtEPE.cs" />
     <Compile Include="EditText__FM_EPL__txtCusCode.cs" />
+    <Compile Include="EditText__FM_MHF__txtMtrcla.cs" />
     <Compile Include="EditText__FM_MHF__txtSpCode.cs" />
     <Compile Include="EditText__FM_MHF__txtWTCode.cs" />
     <Compile Include="FMGeneral_Db.cs" />
