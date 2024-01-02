@@ -84,8 +84,11 @@ namespace FMGeneral.Class_Files
 
                         TComboBox.LoadSeries(_form, "Item_0", "FM_MHF");
                         //@TABLE is the name of the DBDataSource the form's connect to 
-                        _withQAT.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_MHF"));
+                        string series = TUser.GetDefaultSeries("FM_MHF", SeriesReturnType.Series);
+                        _withQAT.SetValue("Series", 0, TUser.GetDefaultSeries("FM_MHF", SeriesReturnType.Series));
                         _withQAT.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_MHF"))));
+                        //_withQAT.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_MHF"));
+                        //_withQAT.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_MHF"))));
                         _withQAT.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
 
                         TMatrix.addRow(_form, "0_U_G", "#", "@FM_MHF1");
@@ -96,6 +99,8 @@ namespace FMGeneral.Class_Files
                         TComboBox.Fill(oCombo, sSQL, false);
 
                         _form.Items.Item("btnInvGen").Enabled = false;
+
+                        _form.Items.Item("txtSpCode").Click(BoCellClickType.ct_Regular);
                         break;
                     #endregion
 
