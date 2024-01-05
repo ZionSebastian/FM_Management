@@ -32,6 +32,7 @@ namespace FMGeneral.Class_Files
             string sDateNow = string.Empty;
             string sSQL = string.Empty;
             SAPbouiCOM.Matrix oMatrx;
+            SAPbouiCOM.Matrix oMatrx1;
             SAPbouiCOM.Column oColType = default(SAPbouiCOM.Column);
             try
             {
@@ -42,12 +43,15 @@ namespace FMGeneral.Class_Files
                     case "FM_BER":
                         var _withBER = _form.DataSources.DBDataSources.Item("@FM_OBER");
                         var _withBER1 = _form.DataSources.DBDataSources.Item("@FM_BER1");
+                        var _withBER2 = _form.DataSources.DBDataSources.Item("@FM_BER2");
 
                         oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
 
                         TComboBox.LoadSeries(_form, "Item_0", "FM_BER");
                         //@TABLE is the name of the DBDataSource the form's connect to 
-                        _withBER.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_BER"));
+                        //_withBER.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_BER"));
+                        string series1 = TUser.GetDefaultSeries("FM_BER", SeriesReturnType.Series);
+                        _withBER.SetValue("Series", 0, TUser.GetDefaultSeries("FM_BER", SeriesReturnType.Series));
                         _withBER.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_BER"))));
                         _withBER.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
 
@@ -71,7 +75,34 @@ namespace FMGeneral.Class_Files
                             oMatrx.LoadFromDataSource();
 
                         }
-                        
+
+
+                        oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("1_U_G").Specific;
+                        SAPbobsCOM.Recordset oRS = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+                        string BankSQL = "select distinct CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN 'CASH IN HAND' ";
+                               BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN 'BFA'  WHEN T1.AcctCode = '124202' THEN 'BIC' ";
+                               BankSQL += "WHEN T1.AcctCode = '124204' THEN 'BPA' WHEN T1.AcctCode = '124205' OR T1.AcctCode = '124507' THEN 'BCGA' WHEN T1.AcctCode = '124206' OR T1.AcctCode = '124516' THEN 'SBA' ";
+                               BankSQL += "WHEN T1.AcctCode = '124207' THEN 'BAI' WHEN T1.AcctCode = '124211' THEN 'BANCO VALOR' WHEN T1.AcctCode = '124213' THEN 'YETU'  ";
+                               BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN 'BIR' WHEN T1.AcctCode = '124215'  THEN 'BCS' WHEN T1.AcctCode = '124216' THEN 'KEVE' WHEN T1.AcctCode = '124404' THEN 'BCI' ";
+                               BankSQL += "END AS[AccountName] FROM OACT T1 WHERE T1.AcctCode in ('124101', '124201', '124202', '124204', '124205', '124206', '124207', '124211', '124404', '124213', '124214', '124215', '124216', '124102', '124500', '124507', '124516', '124521', '124104', '124708') ";
+                        oRS = TSQL.GetRecords(BankSQL);
+
+                        oMatrx1.FlushToDataSource();
+                        oRS.MoveFirst();
+                        for (int i=0;i< oRS.RecordCount;i++)
+                        {
+                            
+                            TMatrix.addRow(_form, "1_U_G", "#", "@FM_BER2");
+                            TMatrix.RefreshRowNo(_form, "1_U_G", "#");
+
+                            string AccountName = oRS.Fields.Item("AccountName").Value.ToString().Trim();
+                            _withBER2.SetValue("U_Bank",i, AccountName);
+                            //_withBER2.SetValue("U_Bank", i, "MM");
+
+                            oMatrx1.LoadFromDataSource();
+                            oRS.MoveNext();
+                        }
 
 
                         break;
@@ -105,7 +136,23 @@ namespace FMGeneral.Class_Files
                         string month = TSQL.GetSingleRecord("select Month(GETDATE())");
                         _withQAT.SetValue("U_Month", 0, month);
                         _form.Items.Item("txtSpCode").Click(BoCellClickType.ct_Regular);
-                        break;
+
+                        string signeduser = TUser.UserCode;
+                        string InvAccess = TSQL.GetSingleRecord("select U_MHFAccess from OUSR WHERE USER_CODE='" + signeduser + "'").ToString().Trim();
+                        if (InvAccess == "Y")
+                        {
+                            
+                            _form.Items.Item("txtWTCode").Enabled = true;
+                            _form.Items.Item("11_U_Cb").Enabled = true;
+                        }
+                        else
+                        {
+                            _form.Items.Item("txtWTCode").Enabled = false;
+                            _form.Items.Item("11_U_Cb").Enabled = false;
+
+                        }
+
+                            break;
                     #endregion
 
                     #region EPL

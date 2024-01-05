@@ -45,11 +45,12 @@ namespace FMGeneral
                     return false;
                 }
                 else if(SQLCount > 0)
+                //else if (_with.GetValue("U_GLAcct", 0).ToString().Trim() == "")
                 {
                     TNotification.MessageBox("Select an Appropriate G/L Account");
                     return false;
                 }
-                else if (_with.GetValue("U_APInvDate", 0).ToString().Trim() != "")
+                else if (_with.GetValue("U_APInvDate", 0).ToString().Trim() == "")
                 {
                     TNotification.MessageBox("Select a date for Invoice Generation.");
                     return false;
@@ -88,7 +89,7 @@ namespace FMGeneral
                 //string selectedUID = _with.GetValue("DocNum", 0);
 
                 int i = 0;
-                if (CreateServiceInv(oForm))
+                if (CreateServiceAPInv(oForm))
                 {
                     string oDocKey = B1Connections.diCompany.GetNewObjectKey();
 
@@ -108,7 +109,7 @@ namespace FMGeneral
             }
         }
 
-        public static bool CreateServiceInv(Form form)
+        public static bool CreateServiceAPInv(Form form)
         {
             bool bCreated = false;
             String DocType = "";
@@ -148,23 +149,32 @@ namespace FMGeneral
                 SAPbobsCOM.Document_Lines oSerInvLines = oServInvoice.Lines;
 
 
-                string MHF1SQL = "select T0.U_WTCode,T0.U_SplrCode,T0.U_SplrName,T1.U_Remark,T1.U_TotlCost,T1.U_GLAcct,T1.U_VATCode,T1.U_CstCrCode,T1.U_DprtCode from [@FM_OMHF] T0 INNER JOIN [@FM_MHF1] T1 ON T1.DocEntry=T0.DocEntry WHERE T0.DocEntry='" + _with.GetValue("DocEntry", 0).ToString() + "'  and  T1.U_TotlCost>0 ";
+                //string MHF1SQL = "select T0.U_WTCode,T0.U_SplrCode,T0.U_SplrName,T1.U_Remark,T1.U_TotlCost,T1.U_GLAcct,T1.U_VATCode,T1.U_CstCrCode,T1.U_DprtCode from [@FM_OMHF] T0 INNER JOIN [@FM_MHF1] T1 ON T1.DocEntry=T0.DocEntry WHERE T0.DocEntry='" + _with.GetValue("DocEntry", 0).ToString() + "'  and  T1.U_TotlCost>0 ";
+                //string MHF1SQL = "select T0.U_WTCode,SUM(T1.U_TotlCost) \"U_TotlCost\"  from [@FM_OMHF] T0 INNER JOIN [@FM_MHF1] T1 ON T1.DocEntry=T0.DocEntry WHERE T0.DocEntry='" + _with.GetValue("DocEntry", 0).ToString() + "'  and  T1.U_TotlCost>0 group by T0.U_WTCode";
+                string MHF1SQL = "select T0.U_WTCode,T0.U_SplrCode,T0.U_SplrName,Max(T1.U_Remark)\"Description\",SUM(T1.U_TotlCost) \"TotlCost\",T1.U_GLAcct,MAX(T1.U_VATCode)\"VATCode\",T1.U_CstCrCode,T1.U_DprtCode from [@FM_OMHF] T0 INNER JOIN [@FM_MHF1] T1 ON T1.DocEntry=T0.DocEntry WHERE T0.DocEntry='" + _with.GetValue("DocEntry", 0).ToString() + "'  and  T1.U_TotlCost>0 GROUP BY T1.U_DprtCode,T1.U_CstCrCode,T1.U_GLAcct,T0.U_WTCode,T0.U_SplrCode,T0.U_SplrName";
                 oRS = TSQL.GetRecords(MHF1SQL);
                 oRS.MoveFirst();
                 string WithTax= oRS.Fields.Item("U_WTCode").Value.ToString().Trim();
                 for (int i = 0; i < oRS.RecordCount; i++)
                 {
-                    string test= oRS.Fields.Item("U_Remark").Value.ToString().Trim();
-                    double test1 = Convert.ToDouble(oRS.Fields.Item("U_TotlCost").Value.ToString().Trim());
-                    oSerInvLines.ItemDescription= oRS.Fields.Item("U_Remark").Value.ToString().Trim();
+                    //string test= oRS.Fields.Item("U_Remark").Value.ToString().Trim();
+                    double test1 = Convert.ToDouble(oRS.Fields.Item("TotlCost").Value.ToString().Trim());
+                    oSerInvLines.ItemDescription = oRS.Fields.Item("Description").Value.ToString().Trim();
                     oSerInvLines.AccountCode = oRS.Fields.Item("U_GLAcct").Value.ToString().Trim();
-                    
+                    //oSerInvLines.ItemDescription = _with.GetValue("U_Remark", 0).ToString();
+                    //oSerInvLines.AccountCode = _with.GetValue("U_GLAcct", 0).ToString();
+
                     oSerInvLines.CostingCode4 = oRS.Fields.Item("U_CstCrCode").Value.ToString().Trim();
                     oSerInvLines.CostingCode = oRS.Fields.Item("U_DprtCode").Value.ToString().Trim();
-                    oSerInvLines.LineTotal = Convert.ToDouble(oRS.Fields.Item("U_TotlCost").Value.ToString().Trim());
-                    if(oRS.Fields.Item("U_VATCode").Value.ToString().Trim()!="")
+                    //oSerInvLines.CostingCode4 = _with.GetValue("U_AssetCode", 0).ToString().Trim(); 
+                    //oSerInvLines.CostingCode = _with.GetValue("U_DprtCode", 0).ToString().Trim();
+                    oSerInvLines.LineTotal = Convert.ToDouble(oRS.Fields.Item("TotlCost").Value.ToString().Trim());
+
+                    if(oRS.Fields.Item("VATCode").Value.ToString().Trim()!="")
+                    //if (_with.GetValue("U_VATCode", 0).ToString().Trim() != "")
                     {
-                        oSerInvLines.VatGroup = oRS.Fields.Item("U_VATCode").Value.ToString().Trim();
+                        //oSerInvLines.VatGroup = _with.GetValue("U_VATCode", 0).ToString().Trim();
+                        oSerInvLines.VatGroup = oRS.Fields.Item("VATCode").Value.ToString().Trim();
 
                     }
 

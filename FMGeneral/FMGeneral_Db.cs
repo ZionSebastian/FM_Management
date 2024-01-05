@@ -24,10 +24,11 @@ namespace FMGeneral
                 new B1DbTable("@FM_PRD1", "Production Data Row1", BoUTBTableType.bott_DocumentLines),
                 new B1DbTable("@FM_PRD2", "Production Data Row2", BoUTBTableType.bott_DocumentLines),
                 new B1DbTable("@FM_PRD3", "Production Data Row3", BoUTBTableType.bott_DocumentLines),
-                #endregion
+                #endregion 
                 #region Bank Exchange Rate
                 new B1DbTable("@FM_OBER", "Bank Exchange Rate", BoUTBTableType.bott_Document),
                 new B1DbTable("@FM_BER1", "Bank Exchange Rate Row", BoUTBTableType.bott_DocumentLines),
+                new B1DbTable("@FM_BER2", "Bank Exchange Rate Row2", BoUTBTableType.bott_DocumentLines),
                     #endregion
                     #region No-Object Tables
                     new B1DbTable("@CCS_EPLSETT", "EPL Settings", BoUTBTableType.bott_NoObject),
@@ -38,6 +39,7 @@ namespace FMGeneral
             Columns = new B1DbColumn[]
             {
                 #region Zion
+                
                     #region Machine Hiring
                    new B1DbColumn("@FM_OMHF", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "SplrCode", "Supplier Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -54,6 +56,15 @@ namespace FMGeneral
                    new B1DbColumn("@FM_OMHF", "WTCode", "WithHoldingTax Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "APInvDate", "AP Invoice Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "Month", "Month", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "GLAcct", "GL Account", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 30, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "Asset", "Asset", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "AssetCode", "Asset Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "Departmnt", "Department", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "DprtCode", "Department Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   //new B1DbColumn("@FM_OMHF", "VATCode", "VAT Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_OMHF", "Remark", "Remarks", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 250, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_OMHF", "Vehicle", "Vehicle", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_OMHF", "VhcleCode", "Vehicle Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
 
 
                    new B1DbColumn("@FM_MHF1", "Date", "Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -125,7 +136,7 @@ namespace FMGeneral
 
 
                 #endregion
-
+    
                 #region Bank Exchange Rate
 
                 new B1DbColumn("@FM_OBER", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -137,8 +148,18 @@ namespace FMGeneral
                 new B1DbColumn("@FM_BER1", "SBA", "SBA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 new B1DbColumn("@FM_BER1", "BCGA", "BCGA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 new B1DbColumn("@FM_BER1", "BNA", "BNA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
-                   
-                    #endregion
+
+
+                new B1DbColumn("@FM_BER2", "Bank", "Bank", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 30, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_BER2", "RsrAmount", "Reserved Amount Kz", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_BER2", "RsrAmtUSD", "Reserved Amount USD", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_BER2", "RsrAmtEUR", "Reserved Amount EUR", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
+                new B1DbColumn("OUSR", "MHFAccess", "MHF Invoice Access", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 3, true, new B1WizardBase.B1DbValidValue[]{
+                   new B1WizardBase.B1DbValidValue("Y", "Yes"),
+                   new B1WizardBase.B1DbValidValue("N", "No")}, -1),
+                
+                #endregion
 
                 #region No-Object Tables
                    new B1DbColumn("@CCS_EPLSETT", "Values", "Settings Value", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -149,6 +170,7 @@ namespace FMGeneral
 
             Udos = new B1Udo[] {
                 #region Zion
+                
                     #region Machine Hiring
                      new B1Udo("FM_MHF","Machine Hiring", "FM_OMHF", new string[] {
                                      "FM_MHF1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
@@ -165,6 +187,7 @@ namespace FMGeneral
                                      "FM_PRD1","FM_PRD2","FM_PRD3"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
                                 BoYesNoEnum.tNO, BoYesNoEnum.tYES, BoYesNoEnum.tYES, null, new string[]{ "DocEntry","DocNum"}, new string[]{ "DocEntry","DocNum"}),
                     #endregion 
+                   
                     #region Bank Exchange Rate
                new B1Udo("FM_BER","Bank Exchange Rate", "FM_OBER", new string[] {
                                      "FM_BER1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,

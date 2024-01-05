@@ -28,9 +28,11 @@ namespace FMGeneral
             try
             {
                 string VehicleNumber = with_MHF.GetValue("U_Matricula", 0).ToString().Trim();
+                string ModVhclNum = VehicleNumber.ToLower().Replace(" ","");
                 string Month= with_MHF.GetValue("U_Month", 0).ToString().Trim();
-                int VNcount = Convert.ToInt16(TSQL.GetSingleRecord("select count(DocNum) from [@FM_OMHF] WHERE U_Matricula='"+ VehicleNumber + "' and U_Month='"+ Month + "' and year(U_DocDate)=year(Getdate())").ToString().Trim());
-                //int VNcount = Convert.ToInt16(TSQL.GetSingleRecord("select count(DocNum) from [@FM_OMHF] WHERE U_Matricula='" + VehicleNumber + "' and U_Month='" + Month + "'").ToString().Trim());
+                string SupplierCode=with_MHF.GetValue("U_SplrCode", 0).ToString().Trim();
+                int VNcount = Convert.ToInt16(TSQL.GetSingleRecord("select count(DocNum) from [@FM_OMHF] WHERE lower(REPLACE(U_Matricula, ' ', ''))='" + ModVhclNum + "' and U_Month='"+ Month + "' and year(U_DocDate)=year(Getdate()) and U_SplrCode='"+ SupplierCode + "' and Status='O'").ToString().Trim());
+                //int VNcount = Convert.ToInt16(TSQL.GetSingleRecord("select count(DocNum) from [@FM_OMHF] WHERE lower(REPLACE(U_Matricula, ' ', ''))='" + ModVhclNum + "' and U_Month='" + Month + "' and U_SplrCode='"+ SupplierCode + "' ").ToString().Trim());
                 if (VNcount>0)
                 {
                     TNotification.StatusBarError("Vehicle number already exist!");

@@ -86,6 +86,19 @@ namespace FMGeneral
                                 return false;
                             }
                         }
+                        if (oForm.PaneLevel == 2)
+                        {
+                            oMatrix = (SAPbouiCOM.Matrix)oForm.Items.Item("1_U_G").Specific;
+                            if (oMatrix.RowCount > 0)
+                            {
+                                oForm.Freeze(true);
+                                TMatrix.deleteRow(oForm, "1_U_G");
+                                TMatrix.RefreshRowNo(oForm, "1_U_G", "#");
+
+                                oForm.Freeze(false);
+                                return false;
+                            }
+                        }
                         break;
 
                     case "FM_PRD":

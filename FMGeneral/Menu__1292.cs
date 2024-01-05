@@ -34,8 +34,6 @@ namespace FMGeneral
 
                 switch (oForm.TypeEx)
                 {
-
-                    
                         
                     #region Zion
                     
@@ -82,6 +80,13 @@ namespace FMGeneral
 
 
                         }
+                        if (oForm.PaneLevel == 2)
+                        {
+                            TMatrix.addRow(oForm, "1_U_G", "#", "@FM_BER2");
+                            TMatrix.RefreshRowNo(oForm, "1_U_G", "#");
+
+
+                        }
                         oForm.Freeze(false);
                         return false;
                         break;
@@ -113,7 +118,6 @@ namespace FMGeneral
                         break;
 
                         #endregion
-
 
                 }
                 return false;

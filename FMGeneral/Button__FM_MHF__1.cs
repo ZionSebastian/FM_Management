@@ -31,6 +31,21 @@ namespace FMGeneral
                 {
                     clsFMGeneral.AddMode(form);
                 }
+                if(form.Mode == BoFormMode.fm_OK_MODE)
+                {
+                    string parentMenuUID = "1304"; // You may need to change this to the desired parent menu ID
+
+                    //oMenuItem = SBO_Application.Menus.Item(parentMenuUID);
+
+
+
+                    B1Connections.theAppl.ActivateMenuItem("1304");
+
+
+                    //SAPbouiCOM.Application oApplication=
+                    //oMenuItem = oApplication.Menus.Item(_menuItem);
+                    //form.Refresh();
+                }
                 form.Freeze(false);
             }
             catch (Exception ex)
