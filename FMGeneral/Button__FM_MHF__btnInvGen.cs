@@ -41,7 +41,7 @@ namespace FMGeneral
                 }
                 else if(_with.GetValue("U_APInvEntry",0).ToString().Trim()!="")
                 {
-                    TNotification.MessageBox("AP Invoice Already Generated for this document");
+                    TNotification.MessageBox("Purchase Order already generated for this document");
                     return false;
                 }
                 else if(SQLCount > 0)
@@ -52,7 +52,7 @@ namespace FMGeneral
                 }
                 else if (_with.GetValue("U_APInvDate", 0).ToString().Trim() == "")
                 {
-                    TNotification.MessageBox("Select a date for Invoice Generation.");
+                    TNotification.MessageBox("Select a date for Purchase Order Generation.");
                     return false;
                 }
 
@@ -127,7 +127,8 @@ namespace FMGeneral
                 SAPbobsCOM.Recordset oRS = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
                 SAPbouiCOM.Matrix oMatrix = (SAPbouiCOM.Matrix)form.Items.Item("0_U_G").Specific;
 
-                SAPbobsCOM.Documents oServInvoice = (SAPbobsCOM.Documents)B1Connections.diCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseInvoices);
+                //SAPbobsCOM.Documents oServInvoice = (SAPbobsCOM.Documents)B1Connections.diCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseInvoices);
+                SAPbobsCOM.Documents oServInvoice = (SAPbobsCOM.Documents)B1Connections.diCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseOrders);
                 //oServInvoice.DocObjectCode = SAPbobsCOM.BoObjectTypes.oPurchaseInvoices;
 
                 oServInvoice.DocType = SAPbobsCOM.BoDocumentTypes.dDocument_Service;
@@ -192,12 +193,12 @@ namespace FMGeneral
                 {
                     string oDocKey = B1Connections.diCompany.GetNewObjectKey();
                     SAPbobsCOM.Recordset RS = null;
-                    string InvDocNum = TSQL.GetSingleRecord("Select DocNum from OPCH where DocEntry='"+ oDocKey + "'").ToString().Trim();
+                    string InvDocNum = TSQL.GetSingleRecord("Select DocNum from OPOR where DocEntry='"+ oDocKey + "'").ToString().Trim();
                     _with.SetValue("U_APInvEntry", 0, oDocKey);
                     _with.SetValue("U_APInvNum", 0, InvDocNum);
                     form.Mode = BoFormMode.fm_UPDATE_MODE;
                     form.Items.Item("1").Click(BoCellClickType.ct_Regular);
-                    TNotification.StatusbarSuccess("Purchase Service Invoice Created successfully");
+                    TNotification.StatusbarSuccess("Service Purchase Order Created successfully");
                     bCreated = true;
 
                 }
@@ -207,7 +208,7 @@ namespace FMGeneral
                     string oErrorMesg = null;
                     int oErrNo = 0;
                     B1Connections.diCompany.GetLastError(out oErrNo, out oErrorMesg);
-                    B1Connections.theAppl.MessageBox("ERROR - Copy to  purchase service invoice failed: Error# " + oErrNo + "=> " + oErrorMesg, 1, "Ok", "", "");
+                    B1Connections.theAppl.MessageBox("ERROR - Copy to service Purchase Order failed: Error# " + oErrNo + "=> " + oErrorMesg, 1, "Ok", "", "");
                 }
                 return true;
             }
