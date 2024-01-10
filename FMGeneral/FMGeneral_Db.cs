@@ -148,6 +148,7 @@ namespace FMGeneral
                 new B1DbColumn("@FM_BER1", "SBA", "SBA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 new B1DbColumn("@FM_BER1", "BCGA", "BCGA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 new B1DbColumn("@FM_BER1", "BNA", "BNA", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_BER1", "BMR", "BMR", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
 
 
                 new B1DbColumn("@FM_BER2", "Bank", "Bank", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 30, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),

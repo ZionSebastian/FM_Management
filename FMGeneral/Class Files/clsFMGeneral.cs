@@ -273,7 +273,7 @@ namespace FMGeneral.Class_Files
                     TItem.Enable(oForm, "1_U_E", true);
                     break;
                 case "FM_BER":
-                    //TItem.Enable(oForm, "1_U_E", true);
+                    TItem.Enable(oForm, "1_U_E", true);
                     break;
                     #endregion
 
