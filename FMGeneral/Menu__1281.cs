@@ -50,6 +50,15 @@ namespace FMGeneral
                         oForm.Freeze(false);
                         return false;
                         break;
+                    case "FM_PBD":
+                        oForm.Freeze(true);
+                        oForm.Mode = BoFormMode.fm_FIND_MODE;
+
+                        clsFMGeneral.FindMode(oForm);
+
+                        oForm.Freeze(false);
+                        return false;
+                        break;
                         #endregion
 
                 }

@@ -147,6 +147,24 @@ namespace FMGeneral
                         return false;
                         break;
 
+
+                    case "FM_PBD":
+                        if (oForm.PaneLevel == 1)
+                        {
+                            oMatrix = (SAPbouiCOM.Matrix)oForm.Items.Item("0_U_G").Specific;
+                            if (oMatrix.RowCount > 0)
+                            {
+                                oForm.Freeze(true);
+                                TMatrix.deleteRow(oForm, "0_U_G");
+                                TMatrix.RefreshRowNo(oForm, "0_U_G", "#");
+
+                                oForm.Freeze(false);
+                                return false;
+                            }
+                        }
+                        oForm.Freeze(false);
+                        return false;
+                        break;
                         #endregion
 
                 }

@@ -30,6 +30,13 @@ namespace FMGeneral
                 new B1DbTable("@FM_BER1", "Bank Exchange Rate Row", BoUTBTableType.bott_DocumentLines),
                 new B1DbTable("@FM_BER2", "Bank Exchange Rate Row2", BoUTBTableType.bott_DocumentLines),
                     #endregion
+
+                #region Production Budget
+                    new B1DbTable("@FM_OPBD", "Production Budget", BoUTBTableType.bott_MasterData),
+                    new B1DbTable("@FM_PBD1", "Production Budget Row", BoUTBTableType.bott_MasterDataLines),
+                    new B1DbTable("@FM_OBCT", "Budget Category", BoUTBTableType.bott_MasterData),
+                #endregion
+
                     #region No-Object Tables
                     new B1DbTable("@CCS_EPLSETT", "EPL Settings", BoUTBTableType.bott_NoObject),
                     #endregion
@@ -166,6 +173,31 @@ namespace FMGeneral
                    new B1DbColumn("@CCS_EPLSETT", "Values", "Settings Value", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 #endregion
 
+                   
+                   #region Production Budget
+                    new B1DbColumn("@FM_OPBD", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_OPBD", "Year", "Year",BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 10, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
+
+                    new B1DbColumn("@FM_PBD1", "Category", "Category", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 150, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "January", "January", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "February", "February", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "March", "March", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "April", "April", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "May", "May", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "June", "June", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "July", "July", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "August", "August", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "September", "September", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "October", "October", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "November", "November", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "December", "December", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                    new B1DbColumn("@FM_PBD1", "TotalBdgt", "Total Budget", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
+                    new B1DbColumn("@FM_OBCT", "Category", "Category", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 150, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                #endregion
+               
+
                 #endregion
             };
 
@@ -194,7 +226,20 @@ namespace FMGeneral
                                      "FM_BER1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
                                 BoYesNoEnum.tNO, BoYesNoEnum.tYES, BoYesNoEnum.tYES, null, new string[]{ "DocEntry","DocNum"}, new string[]{ "DocEntry","DocNum"}),
                     #endregion
-
+               #region Production Budget
+                    new B1Udo("FM_PBD", "Production Budget", "FM_OPBD", new string[] {"FM_PBD1"},BoUDOObjType.boud_MasterData, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
+                                    BoYesNoEnum.tNO, BoYesNoEnum.tNO, "AFM_OPBD", new string[] {
+                                    "Code","Name"
+                                    }, new string[] {
+                                    "Code","Name"
+                                              }),
+                    new B1Udo("FM_BCT", "Budget Category", "FM_OBCT", new string[] {},BoUDOObjType.boud_MasterData, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
+                                    BoYesNoEnum.tNO, BoYesNoEnum.tNO, "", new string[] {
+                                    "Code","Name"
+                                    }, new string[] {
+                                    "Code","Name"
+                                              }),
+                    #endregion
                     #endregion
                 };
         }

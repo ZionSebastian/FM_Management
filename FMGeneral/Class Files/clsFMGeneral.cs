@@ -254,7 +254,52 @@ namespace FMGeneral.Class_Files
                         }
                         
                         break;
+                    #endregion
+
+                    #region PBD
+                    case "FM_PBD":
+                        var _withPDB = _form.DataSources.DBDataSources.Item("@FM_OPBD");
+                        var _withPDB1 = _form.DataSources.DBDataSources.Item("@FM_PBD1");
+
+                        oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+
+                        //TComboBox.LoadSeries(_form, "Item_1", "FM_EPL");
+                        ////@TABLE is the name of the DBDataSource the form's connect to 
+                        //_withEPL.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_EPL"));
+                        //_withEPL.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_EPL"))));
+                        _withPDB.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+                        _withPDB.SetValue("U_Year", 0, System.DateTime.Today.ToString("yyyy"));
+
+                        //TMatrix.addRow(_form, "0_U_G", "#", "@FM_EPL1");
+                        //TMatrix.RefreshRowNo(_form, "0_U_G", "#");
+                        //_form.Items.Item("txtCusCode").Click(BoCellClickType.ct_Regular);
+
+
+                        oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+                        SAPbobsCOM.Recordset oRS1 = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+                        string sqlCategory = "select U_Category from [@FM_OBCT]";
+                        oRS1 = TSQL.GetRecords(sqlCategory);
+
+                        oMatrx1.FlushToDataSource();
+                        oRS1.MoveFirst();
+                        for (int i = 0; i < oRS1.RecordCount; i++)
+                        {
+
+                            TMatrix.addRow(_form, "0_U_G", "#", "@FM_PBD1");
+                            TMatrix.RefreshRowNo(_form, "0_U_G", "#");
+
+                            string categoryName = oRS1.Fields.Item("U_Category").Value.ToString().Trim();
+                            _withPDB1.SetValue("U_Category", i, categoryName);
+                            //_withBER2.SetValue("U_Bank", i, "MM");
+
+                            oMatrx1.LoadFromDataSource();
+                            oRS1.MoveNext();
+                        }
+                        break;
                         #endregion
+
+
                         #endregion
                 }
             }

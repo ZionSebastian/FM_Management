@@ -57,6 +57,15 @@
                         oForm.Freeze(false);
                         return false;
                         break;
+                    case "FM_PBD":
+                        oForm.Freeze(true);
+                        oForm.Mode = BoFormMode.fm_ADD_MODE;
+                        //TForm.Enable(oForm);
+                        clsFMGeneral.AddMode(oForm);
+
+                        oForm.Freeze(false);
+                        return false;
+                        break;
                         #endregion
 
 
