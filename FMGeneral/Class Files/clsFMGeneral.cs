@@ -278,7 +278,7 @@ namespace FMGeneral.Class_Files
                         oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
                         SAPbobsCOM.Recordset oRS1 = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
 
-                        string sqlCategory = "select U_Category from [@FM_OBCT]";
+                        string sqlCategory = "select Code,U_Category from [@FM_OBCT] order by Cast(Code as int)";
                         oRS1 = TSQL.GetRecords(sqlCategory);
 
                         oMatrx1.FlushToDataSource();
@@ -290,6 +290,8 @@ namespace FMGeneral.Class_Files
                             TMatrix.RefreshRowNo(_form, "0_U_G", "#");
 
                             string categoryName = oRS1.Fields.Item("U_Category").Value.ToString().Trim();
+                            string categoryCode = oRS1.Fields.Item("Code").Value.ToString().Trim();
+                            _withPDB1.SetValue("U_CtgryCode", i, categoryCode);
                             _withPDB1.SetValue("U_Category", i, categoryName);
                             //_withBER2.SetValue("U_Bank", i, "MM");
 
