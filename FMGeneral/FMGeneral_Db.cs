@@ -11,7 +11,7 @@ namespace FMGeneral
             Tables = new B1DbTable[] {
 
                 #region Zion
-                /*
+                
                     #region Machine Hiring
                 new B1DbTable("@FM_OMHF", "Machine Hiring", BoUTBTableType.bott_Document),
                 new B1DbTable("@FM_MHF1", "Machine Hiring Row", BoUTBTableType.bott_DocumentLines),
@@ -31,7 +31,7 @@ namespace FMGeneral
                 new B1DbTable("@FM_BER1", "Bank Exchange Rate Row", BoUTBTableType.bott_DocumentLines),
                 new B1DbTable("@FM_BER2", "Bank Exchange Rate Row2", BoUTBTableType.bott_DocumentLines),
                     #endregion
-                */
+                
 
                 #region Production Budget
                     new B1DbTable("@FM_OPBD", "Production Budget", BoUTBTableType.bott_MasterData),
@@ -48,7 +48,7 @@ namespace FMGeneral
             Columns = new B1DbColumn[]
             {
                 #region Zion
-                /*
+                
                     #region Machine Hiring
                    new B1DbColumn("@FM_OMHF", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_OMHF", "SplrCode", "Supplier Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -174,7 +174,7 @@ namespace FMGeneral
                 #region No-Object Tables
                    new B1DbColumn("@CCS_EPLSETT", "Values", "Settings Value", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 #endregion
-                   */
+                   
                    
                    #region Production Budget
                     new B1DbColumn("@FM_OPBD", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),

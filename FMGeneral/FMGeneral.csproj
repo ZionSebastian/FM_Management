@@ -109,6 +109,7 @@
     <Compile Include="Form__140.cs" />
     <Compile Include="Form__410000100.cs" />
     <Compile Include="Form__42.cs" />
+    <Compile Include="Form__FM_BER.cs" />
     <Compile Include="Form__FM_MHF.cs" />
     <Compile Include="Matrix__FM_BER__1_U_G.cs" />
     <Compile Include="Matrix__FM_BER__0_U_G.cs" />
