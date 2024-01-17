@@ -58,9 +58,9 @@ namespace FMGeneral.Class_Files
 
                         oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
                         //oMatrx.FlushToDataSource();
-                        
-                        for (int i=1;i<=2;i++)
-                         {
+
+                        for (int i = 1; i <= 2; i++)
+                        {
                             oMatrx.FlushToDataSource();
                             TMatrix.addRow(_form, "0_U_G", "#", "@FM_BER1");
                             TMatrix.RefreshRowNo(_form, "0_U_G", "#");
@@ -80,24 +80,35 @@ namespace FMGeneral.Class_Files
                         oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("1_U_G").Specific;
                         SAPbobsCOM.Recordset oRS = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
 
-                        string BankSQL = "select distinct CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN 'CASH IN HAND' ";
-                               BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN 'BFA'  WHEN T1.AcctCode = '124202' THEN 'BIC' ";
-                               BankSQL += "WHEN T1.AcctCode = '124204' THEN 'BPA' WHEN T1.AcctCode = '124205' OR T1.AcctCode = '124507' THEN 'BCGA' WHEN T1.AcctCode = '124206' OR T1.AcctCode = '124516' THEN 'SBA' ";
-                               BankSQL += "WHEN T1.AcctCode = '124207' THEN 'BAI' WHEN T1.AcctCode = '124211' THEN 'BANCO VALOR' WHEN T1.AcctCode = '124213' THEN 'YETU'  ";
-                               BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN 'BIR' WHEN T1.AcctCode = '124215'  THEN 'BCS' WHEN T1.AcctCode = '124216' THEN 'KEVE' WHEN T1.AcctCode = '124404' THEN 'BCI' ";
-                               BankSQL += "END AS[AccountName] FROM OACT T1 WHERE T1.AcctCode in ('124101', '124201', '124202', '124204', '124205', '124206', '124207', '124211', '124404', '124213', '124214', '124215', '124216', '124102', '124500', '124507', '124516', '124521', '124104', '124708') ";
+                        string BankSQL = "select * from( select distinct CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN 'CASH IN HAND' ";
+                        BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN 'BFA'  WHEN T1.AcctCode = '124202' THEN 'BIC' ";
+                        BankSQL += "WHEN T1.AcctCode = '124204' THEN 'BPA' WHEN T1.AcctCode = '124205' OR T1.AcctCode = '124507' THEN 'BCGA' WHEN T1.AcctCode = '124206' OR T1.AcctCode = '124516' THEN 'SBA' ";
+                        BankSQL += "WHEN T1.AcctCode = '124207' THEN 'BAI' WHEN T1.AcctCode = '124211' THEN 'BANCO VALOR' WHEN T1.AcctCode = '124213' THEN 'YETU'  ";
+                        BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN 'BIR' WHEN T1.AcctCode = '124215'  THEN 'BCS' WHEN T1.AcctCode = '124216' THEN 'KEVE' WHEN T1.AcctCode = '124404' THEN 'BCI' ";
+                        BankSQL += "WHEN T1.AcctCode='125216' THEN 'DEBIT CARD-02-MEDICAL USE' WHEN T1.AcctCode='125217' THEN 'DEBIT CARD-03-OPERATION USE' WHEN T1.AcctCode='125218' THEN 'DEBIT CARD-04-OFFICE USE' ";
+                        BankSQL += "WHEN T1.AcctCode = '125219' THEN 'DEBIT CARD-15.001 BENGUELA' WHEN T1.AcctCode = '125220' THEN 'DEBIT CARD-15.002 OFFICE'END AS[AccountName] ";
+
+                        BankSQL += ",CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN '1' ";
+                        BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN '2'  WHEN T1.AcctCode = '124202' THEN '3' ";
+                        BankSQL += "WHEN T1.AcctCode = '124204' THEN '4' WHEN T1.AcctCode = '124205' OR T1.AcctCode = '124507' THEN '5' WHEN T1.AcctCode = '124206' OR T1.AcctCode = '124516' THEN '6' ";
+                        BankSQL += "WHEN T1.AcctCode = '124207' THEN '7' WHEN T1.AcctCode = '124211' THEN '8' WHEN T1.AcctCode = '124213' THEN '9'  ";
+                        BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN '10' WHEN T1.AcctCode = '124215'  THEN '11' WHEN T1.AcctCode = '124216' THEN '12' WHEN T1.AcctCode = '124404' THEN '13' ";
+                        BankSQL += "WHEN T1.AcctCode='125216' THEN '14' WHEN T1.AcctCode='125217' THEN '15' WHEN T1.AcctCode='125218' THEN '16' ";
+                        BankSQL += "WHEN T1.AcctCode = '125219' THEN '17' WHEN T1.AcctCode = '125220' THEN '18'END AS[AccountOrder] ";
+
+                        BankSQL += " FROM OACT T1 WHERE T1.AcctCode in ('124101', '124201', '124202', '124204', '124205', '124206', '124207', '124211', '124404', '124213', '124214', '124215', '124216', '124102', '124500', '124507', '124516', '124521', '124104', '124708','125216','125217','125218','125219','125220') )A order by cast([AccountOrder] as numeric)";
                         oRS = TSQL.GetRecords(BankSQL);
 
                         oMatrx1.FlushToDataSource();
                         oRS.MoveFirst();
-                        for (int i=0;i< oRS.RecordCount;i++)
+                        for (int i = 0; i < oRS.RecordCount; i++)
                         {
-                            
+
                             TMatrix.addRow(_form, "1_U_G", "#", "@FM_BER2");
                             TMatrix.RefreshRowNo(_form, "1_U_G", "#");
 
                             string AccountName = oRS.Fields.Item("AccountName").Value.ToString().Trim();
-                            _withBER2.SetValue("U_Bank",i, AccountName);
+                            _withBER2.SetValue("U_Bank", i, AccountName);
                             //_withBER2.SetValue("U_Bank", i, "MM");
 
                             oMatrx1.LoadFromDataSource();
@@ -141,7 +152,7 @@ namespace FMGeneral.Class_Files
                         string InvAccess = TSQL.GetSingleRecord("select U_MHFAccess from OUSR WHERE USER_CODE='" + signeduser + "'").ToString().Trim();
                         if (InvAccess == "Y")
                         {
-                            
+
                             _form.Items.Item("txtWTCode").Enabled = true;
                             _form.Items.Item("11_U_Cb").Enabled = true;
                         }
@@ -152,7 +163,7 @@ namespace FMGeneral.Class_Files
 
                         }
 
-                            break;
+                        break;
                     #endregion
 
                     #region EPL
@@ -218,14 +229,14 @@ namespace FMGeneral.Class_Files
 
                         oMatrix3.Columns.Item("C_2_3").Editable = true;
 
-                        for (int i=1;i<=12;i++)
+                        for (int i = 1; i <= 12; i++)
                         {
-                           // string MonthSql = TSQL.GetSingleRecord("select DateName(month, "+i+")").ToString().Trim();
+                            // string MonthSql = TSQL.GetSingleRecord("select DateName(month, "+i+")").ToString().Trim();
                             string MonthSql = TSQL.GetSingleRecord("Select DateName(month , DateAdd(month," + i + " , -1 ) )+'-'+ cast(year(getdate()) as varchar)").ToString().Trim();
-                            _withPRD1.SetValue("U_FPMonth", i-1, MonthSql);
-                            _withPRD2.SetValue("U_RMMonth", i-1, MonthSql);
-                            _withPRD3.SetValue("U_SMMonth", i-1, MonthSql);
-                            if(i==12)
+                            _withPRD1.SetValue("U_FPMonth", i - 1, MonthSql);
+                            _withPRD2.SetValue("U_RMMonth", i - 1, MonthSql);
+                            _withPRD3.SetValue("U_SMMonth", i - 1, MonthSql);
+                            if (i == 12)
                             {
                                 _withPRD1.SetValue("U_FPMonth", i, "GrandTotal");
                                 _withPRD2.SetValue("U_RMMonth", i, "GrandTotal");
@@ -237,7 +248,7 @@ namespace FMGeneral.Class_Files
                             oMatrix2.LoadFromDataSourceEx();
                             oMatrix3.LoadFromDataSourceEx();
 
-                            if (i!=12)
+                            if (i != 12)
                             {
                                 TMatrix.addRow(_form, "0_U_G", "#", "@FM_PRD1");
                                 TMatrix.RefreshRowNo(_form, "0_U_G", "#");
@@ -252,7 +263,7 @@ namespace FMGeneral.Class_Files
                             //oMatrix2.LoadFromDataSourceEx();
                             //oMatrix3.LoadFromDataSourceEx();
                         }
-                        
+
                         break;
                     #endregion
 
