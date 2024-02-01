@@ -38,8 +38,11 @@ namespace FMGeneral
                     new B1DbTable("@FM_PBD1", "Production Budget Row", BoUTBTableType.bott_MasterDataLines),
                     new B1DbTable("@FM_OBCT", "Budget Category", BoUTBTableType.bott_MasterData),
                 #endregion
-
-                    #region No-Object Tables
+                #region AP Debit Memo
+                    new B1DbTable("@FM_ORPD", "AP Debit Memo", BoUTBTableType.bott_Document),
+                    new B1DbTable("@FM_RPD1", "AP Debit Memo Row", BoUTBTableType.bott_DocumentLines),
+                #endregion
+                #region No-Object Tables
                     new B1DbTable("@CCS_EPLSETT", "EPL Settings", BoUTBTableType.bott_NoObject),
                     #endregion
                 #endregion
@@ -145,7 +148,58 @@ namespace FMGeneral
 
 
                 #endregion
-    
+                #region AP Debit Memo
+                   new B1DbColumn("@FM_ORPD", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "DocDueDate", "Due Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "CardCode", "Supplier Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "CardName", "Supplier Name", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "NumAtCard", "Supplier Ref. No.", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 60, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "DocType", "Document Type", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 2, true, new B1WizardBase.B1DbValidValue[]{
+                   new B1WizardBase.B1DbValidValue("I", "Item"),
+                   new B1WizardBase.B1DbValidValue("S", "Service")}, -1),
+                   new B1DbColumn("@FM_ORPD", "DiscPrcnt", "Discount Percentage", BoFieldTypes.db_Float, BoFldSubTypes.st_Percentage, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "Remark", "Remarks", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 150, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "DocTotal", "Document Total", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "JrnlEntry", "Journal Entry", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "TotlBfrDsc", "Total Before Discount", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "TaxAmount", "Tax Amount", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "ITG_SignDigest", "ITG_SignDigest", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 200, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "DocCur", "Document Currency", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 3, true, new B1WizardBase.B1DbValidValue[]{
+                   new B1WizardBase.B1DbValidValue("AOA", "AOA"),
+                   new B1WizardBase.B1DbValidValue("USD", "USD"),
+                   new B1WizardBase.B1DbValidValue("EUR", "EUR")}, -1),
+                   new B1DbColumn("@FM_ORPD", "Address", "Addrress", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 200, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "Address2", "Addrress2", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 200, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "DocRate", "Document Rate", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "GroupNum", "GroupNum", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_ORPD", "PymntGrp", "Payment Group", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
+
+                   new B1DbColumn("@FM_RPD1", "ItemCode", "Item Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Dscription", "Description", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Quantity", "Quantity", BoFieldTypes.db_Float, BoFldSubTypes.st_Quantity, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "UnitPrice", "Unit Price", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "DiscPrcnt", "Discount Percentage", BoFieldTypes.db_Float, BoFldSubTypes.st_Percentage, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "VatGroup", "VATCode", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 10, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "LineTotal", "LineTotal", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "UomCode", "UoM Code", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 10, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "AcctCode", "GL Account", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "AcctName", "GL Account Name", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 60, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "WtLiable", "WTaxLiable", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 2, true, new B1WizardBase.B1DbValidValue[]{
+                   new B1WizardBase.B1DbValidValue("Y", "Yes"),
+                   new B1WizardBase.B1DbValidValue("N", "No")}, -1),
+                   new B1DbColumn("@FM_RPD1", "Dprtmnts", "Departments", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Employee", "Employee", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Vehicle", "Vehicle", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Asset", "Asset", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Rate", "Rate", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "ItemAcct", "Item Account", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "VATAcct", "VAT Account", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "VATAmount", "VAT Amount", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   new B1DbColumn("@FM_RPD1", "Price", "Price", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                   
+                #endregion
+
                 #region Bank Exchange Rate
 
                 new B1DbColumn("@FM_OBER", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -242,6 +296,13 @@ namespace FMGeneral
                                     "Code","Name"
                                               }),
                     #endregion
+
+                    #region AP Debit Memo
+                     new B1Udo("FM_RPD","AP Debit Memo", "FM_ORPD", new string[] {
+                                     "FM_RPD1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
+                                BoYesNoEnum.tNO, BoYesNoEnum.tYES, BoYesNoEnum.tYES, null, new string[]{ "DocEntry","DocNum"}, new string[]{ "DocEntry","DocNum"}),
+                    #endregion
+
                     #endregion
                 };
         }

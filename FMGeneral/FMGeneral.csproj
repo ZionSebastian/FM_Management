@@ -89,10 +89,15 @@
     <Compile Include="Button__FM_MHF__btnInvGen.cs" />
     <Compile Include="Button__FM_PBD__1.cs" />
     <Compile Include="Button__FM_PRD__1.cs" />
+    <Compile Include="Button__FM_RPD__1.cs" />
+    <Compile Include="Button__FM_RPD__btnJEGen.cs" />
+    <Compile Include="Button__FM_RPD__btnPrint.cs" />
     <Compile Include="Class Files\clsFMGeneral.cs" />
     <Compile Include="Class Files\globalvariables.cs" />
     <Compile Include="ComboBox__FM_MHF__11_U_Cb.cs" />
     <Compile Include="ComboBox__FM_MHF__cmbMonth.cs" />
+    <Compile Include="ComboBox__FM_RPD__25_U_Cb.cs" />
+    <Compile Include="ComboBox__FM_RPD__Item_19.cs" />
     <Compile Include="EditText__140__txtEPE.cs" />
     <Compile Include="EditText__42__txtEPE.cs" />
     <Compile Include="EditText__FM_EPL__txtCusCode.cs" />
@@ -104,6 +109,8 @@
     <Compile Include="EditText__FM_MHF__txtVatCod.cs" />
     <Compile Include="EditText__FM_MHF__txtVchle.cs" />
     <Compile Include="EditText__FM_MHF__txtWTCode.cs" />
+    <Compile Include="EditText__FM_RPD__txtCrdCod.cs" />
+    <Compile Include="EditText__FM_RPD__txtPayTrm.cs" />
     <Compile Include="FMGeneral_Db.cs" />
     <Compile Include="FMGeneral_Cockpits.cs" />
     <Compile Include="Form__140.cs" />
@@ -111,6 +118,7 @@
     <Compile Include="Form__42.cs" />
     <Compile Include="Form__FM_BER.cs" />
     <Compile Include="Form__FM_MHF.cs" />
+    <Compile Include="Form__FM_RPD.cs" />
     <Compile Include="Matrix__FM_BER__1_U_G.cs" />
     <Compile Include="Matrix__FM_BER__0_U_G.cs" />
     <Compile Include="Matrix__FM_EPL__0_U_G.cs" />
@@ -119,6 +127,7 @@
     <Compile Include="Matrix__FM_PRD__0_U_G.cs" />
     <Compile Include="Matrix__FM_PRD__1_U_G.cs" />
     <Compile Include="Matrix__FM_PRD__2_U_G.cs" />
+    <Compile Include="Matrix__FM_RPD__0_U_G.cs" />
     <Compile Include="Menu__1281.cs" />
     <Compile Include="Menu__1282.cs" />
     <Compile Include="Menu__1292.cs" />
@@ -128,6 +137,7 @@
     <Compile Include="Menu__mnuMHF.cs" />
     <Compile Include="Menu__mnuPBD.cs" />
     <Compile Include="Menu__mnuPRD.cs" />
+    <Compile Include="Menu__mnuRPD.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />

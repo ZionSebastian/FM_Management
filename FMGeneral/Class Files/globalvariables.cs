@@ -15,6 +15,7 @@ namespace FMGeneral.Class_Files
         static string eplentry;
         static string dlvrycustcode;
         static string eplprintDocEntry;
+        static string rpdprintDocEntry;
         static bool blnCRSPrint;
         static string strPrintType;
 
@@ -66,6 +67,13 @@ namespace FMGeneral.Class_Files
             get { return eplprintDocEntry; }
 
             set { eplprintDocEntry = value; }
+        }
+
+        public static string RPDPrintDocEntry
+        {
+            get { return rpdprintDocEntry; }
+
+            set { rpdprintDocEntry = value; }
         }
 
         public static bool CRSPrint

@@ -57,6 +57,18 @@ namespace FMGeneral
                         return false;
                         break;
 
+                    case "FM_RPD":
+                        oForm.Freeze(true);
+                        if (oForm.PaneLevel == 1)
+                        {
+                            TMatrix.addRow(oForm, "0_U_G", "#", "@FM_RPD1");
+                            TMatrix.RefreshRowNo(oForm, "0_U_G", "#");
+                            
+                        }
+                        oForm.Freeze(false);
+                        return false;
+                        break;
+
 
                     case "FM_EPL":
                         oForm.Freeze(true);
