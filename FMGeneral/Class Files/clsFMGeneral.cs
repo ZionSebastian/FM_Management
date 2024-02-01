@@ -118,6 +118,58 @@ namespace FMGeneral.Class_Files
 
                         break;
                     #endregion
+
+                    #region RPD
+                    case "FM_RPD":
+                        var _withRPD = _form.DataSources.DBDataSources.Item("@FM_ORPD");
+
+                        oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+
+                        TComboBox.LoadSeries(_form, "Item_1", "FM_RPD");
+                        //@TABLE is the name of the DBDataSource the form's connect to 
+                        string seriesPRD = TUser.GetDefaultSeries("FM_RPD", SeriesReturnType.Series);
+                        _withRPD.SetValue("Series", 0, TUser.GetDefaultSeries("FM_RPD", SeriesReturnType.Series));
+                        _withRPD.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_RPD"))));
+
+                        //_withQAT.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_MHF"));
+                        //_withQAT.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_MHF"))));
+                        _withRPD.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+                        _withRPD.SetValue("U_DocDueDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+
+                        _withRPD.SetValue("U_DocType", 0, "I");
+                        _withRPD.SetValue("U_DocCur", 0, "AOA");
+                        string docRate = TSQL.GetSingleRecord("select Rate from ORTT WHERE CAST(RateDate AS date)=Cast(GETDATE() as date) and Currency='AOA'");
+                        _withRPD.SetValue("U_DocRate", 0, docRate);
+
+                        //
+                        
+                        
+                        if (_withRPD.GetValue("U_DocType", 0).ToString().Trim() == "S")
+                        {
+                            oMatrx.Columns.Item("C_0_1").Visible = false;
+                            oMatrx.Columns.Item("C_0_3").Visible = false;
+                            oMatrx.Columns.Item("Col_0").Visible = false;
+                            oMatrx.Columns.Item("Col_3").Visible = true;
+                        }
+                        else
+                        {
+                            oMatrx.Columns.Item("C_0_1").Visible = true;
+                            oMatrx.Columns.Item("C_0_3").Visible = true;
+                            oMatrx.Columns.Item("Col_0").Visible = true;
+                            oMatrx.Columns.Item("Col_3").Visible = false;
+                        }
+
+                        //
+
+                        TMatrix.addRow(_form, "0_U_G", "#", "@FM_RPD1");
+                        TMatrix.RefreshRowNo(_form, "0_U_G", "#");
+
+
+
+
+                        break;
+                    #endregion
+
                     #region MHF
                     case "FM_MHF":
                         var _withQAT = _form.DataSources.DBDataSources.Item("@FM_OMHF");

@@ -43,6 +43,13 @@ namespace FMGeneral
                     oEditUniqueLId.Value = globalvariables.EPLPrintDocEntry.ToString().Trim();
 
                 }
+                else if (globalvariables.PrintType == "FM_RPD")
+                {
+
+                    SAPbouiCOM.EditText oEditUniqueLId = (SAPbouiCOM.EditText)form.Items.Item("1000003").Specific;
+                    oEditUniqueLId.Value = globalvariables.RPDPrintDocEntry.ToString().Trim();
+
+                }
                 form.Visible = false;
                 blnClose = true;
                 form.Items.Item("1").Click(BoCellClickType.ct_Regular);
