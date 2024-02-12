@@ -137,10 +137,10 @@
                     SAPbobsCOM.Recordset oRs = null;
 
 
-                    FMGeneral_Db addOnDb = new FMGeneral_Db();
-                    addOnDb.Add(B1Connections.diCompany);
-                    FMGeneral_Cockpits addOnCockpit = new FMGeneral_Cockpits();
-                    addOnCockpit.Manage(B1Connections.theAppl, B1Connections.diCompany);
+                    //FMGeneral_Db addOnDb = new FMGeneral_Db();
+                    //addOnDb.Add(B1Connections.diCompany);
+                    //FMGeneral_Cockpits addOnCockpit = new FMGeneral_Cockpits();
+                    //addOnCockpit.Manage(B1Connections.theAppl, B1Connections.diCompany);
 
 
 
