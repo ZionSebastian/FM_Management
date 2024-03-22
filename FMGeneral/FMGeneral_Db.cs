@@ -31,6 +31,10 @@ namespace FMGeneral
                 new B1DbTable("@FM_BER1", "Bank Exchange Rate Row", BoUTBTableType.bott_DocumentLines),
                 new B1DbTable("@FM_BER2", "Bank Exchange Rate Row2", BoUTBTableType.bott_DocumentLines),
                     #endregion
+                #region FG Production Cost
+                new B1DbTable("@FM_OFPC", "FG Production Cost", BoUTBTableType.bott_Document),
+                new B1DbTable("@FM_FPC1", "FG Production Cost Row", BoUTBTableType.bott_DocumentLines),
+                    #endregion
                 
 
                 #region Production Budget
@@ -225,6 +229,17 @@ namespace FMGeneral
                 
                 #endregion
 
+                #region FG Production Cost
+
+                new B1DbColumn("@FM_OFPC", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_OFPC", "Month", "Month", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+
+                new B1DbColumn("@FM_FPC1", "FnshGoods", "Finished Goods", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+                new B1DbColumn("@FM_FPC1", "Cost", "Cost", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
+               
+                
+                #endregion
+
                 #region No-Object Tables
                    new B1DbColumn("@CCS_EPLSETT", "Values", "Settings Value", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 #endregion
@@ -295,6 +310,11 @@ namespace FMGeneral
                                     }, new string[] {
                                     "Code","Name"
                                               }),
+                    #endregion
+                    #region FG Production Cost
+               new B1Udo("FM_FPC","FG Production Cost", "FM_OFPC", new string[] {
+                                     "FM_FPC1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
+                                BoYesNoEnum.tNO, BoYesNoEnum.tYES, BoYesNoEnum.tYES, null, new string[]{ "DocEntry","DocNum"}, new string[]{ "DocEntry","DocNum"}),
                     #endregion
 
                     #region AP Debit Memo

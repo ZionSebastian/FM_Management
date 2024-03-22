@@ -141,6 +141,19 @@ namespace FMGeneral
                         oForm.Freeze(false);
                         return false;
                         break;
+
+                    case "FM_FPC":
+                        oForm.Freeze(true);
+                        if (oForm.PaneLevel == 1)
+                        {
+                            TMatrix.addRow(oForm, "0_U_G", "#", "@FM_FPC1");
+                            TMatrix.RefreshRowNo(oForm, "0_U_G", "#");
+
+
+                        }
+                        oForm.Freeze(false);
+                        return false;
+                        break;
                         #endregion
 
                 }

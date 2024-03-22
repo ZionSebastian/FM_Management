@@ -85,6 +85,7 @@
     <Compile Include="Button__FM_BER__1.cs" />
     <Compile Include="Button__FM_EPL__1.cs" />
     <Compile Include="Button__FM_EPL__btnPrint.cs" />
+    <Compile Include="Button__FM_FPC__1.cs" />
     <Compile Include="Button__FM_MHF__1.cs" />
     <Compile Include="Button__FM_MHF__btnInvGen.cs" />
     <Compile Include="Button__FM_PBD__1.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Matrix__FM_BER__1_U_G.cs" />
     <Compile Include="Matrix__FM_BER__0_U_G.cs" />
     <Compile Include="Matrix__FM_EPL__0_U_G.cs" />
+    <Compile Include="Matrix__FM_FPC__0_U_G.cs" />
     <Compile Include="Matrix__FM_MHF__0_U_G.cs" />
     <Compile Include="Matrix__FM_PBD__0_U_G.cs" />
     <Compile Include="Matrix__FM_PRD__0_U_G.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Menu__1293.cs" />
     <Compile Include="Menu__mnuBER.cs" />
     <Compile Include="Menu__mnuEPL.cs" />
+    <Compile Include="Menu__mnuFPC.cs" />
     <Compile Include="Menu__mnuMHF.cs" />
     <Compile Include="Menu__mnuPBD.cs" />
     <Compile Include="Menu__mnuPRD.cs" />

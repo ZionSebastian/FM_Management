@@ -369,10 +369,57 @@ namespace FMGeneral.Class_Files
                             oRS1.MoveNext();
                         }
                         break;
-                        #endregion
+                    #endregion
+
+                    #region FPC
+                    case "FM_FPC":
+                        var _withFPC = _form.DataSources.DBDataSources.Item("@FM_OFPC");
+                        var _withFPC1 = _form.DataSources.DBDataSources.Item("@FM_FPC1");
+                        SAPbobsCOM.Recordset oRS_FPC = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+                        oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+
+                        TComboBox.LoadSeries(_form, "Item_0", "FM_FPC");
+                        //@TABLE is the name of the DBDataSource the form's connect to 
+                        //_withBER.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_BER"));
+                        //string series1 = TUser.GetDefaultSeries("FM_FPC", SeriesReturnType.Series);
+                        _withFPC.SetValue("Series", 0, TUser.GetDefaultSeries("FM_FPC", SeriesReturnType.Series));
+                        _withFPC.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_FPC"))));
+                        _withFPC.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+
+                        oCombo = (SAPbouiCOM.ComboBox)_form.Items.Item("Item_2").Specific;
+                        TComboBox.RemoveValidValues(oCombo);
+                        sSQL = "SELECT DATENAME(month, F_RefDate)+'-'+ Indicator AS 'MonthYear',DATENAME(month, F_RefDate) [Month] FROM OFPR where Indicator =YEAR(GETDATE())";
+                        TComboBox.Fill(oCombo, sSQL);
 
 
+
+                        oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+                        
+                        string sqlFG = "select CASE WHEN T0.ItmsGrpCod='120'  THEN 'REBARS' when T0.ItmsGrpCod='136' THEN  'FLAT' when T0.ItmsGrpCod='137' THEN 'ANGLE' ";
+                        sqlFG += "when T0.ItmsGrpCod = '142' THEN  'PERFIL' WHEN T0.ItmsGrpCod = '119' THEN 'BILLET'  ELSE '' END AS[Itm] from OITB T0 WHERE T0.ItmsGrpCod IN(120,136,137,142,119)";
+                        oRS_FPC = TSQL.GetRecords(sqlFG);
+                        oRS_FPC.MoveFirst();
+                        for (int i = 0; i < oRS_FPC.RecordCount; i++)
+                        {
+                            oMatrx.FlushToDataSource();
+                            TMatrix.addRow(_form, "0_U_G", "#", "@FM_FPC1");
+                            TMatrix.RefreshRowNo(_form, "0_U_G", "#");
+
+                            string fG_Name = oRS_FPC.Fields.Item("Itm").Value.ToString().Trim();
+                            _withFPC1.SetValue("U_FnshGoods", i, fG_Name);
+
+                            oMatrx.LoadFromDataSource();
+                            oRS_FPC.MoveNext();
+                        }
+
+
+
+                        break;
+
                         #endregion
+
+#endregion
                 }
             }
             catch (Exception ex)
@@ -390,6 +437,9 @@ namespace FMGeneral.Class_Files
                     TItem.Enable(oForm, "1_U_E", true);
                     break;
                 case "FM_BER":
+                    TItem.Enable(oForm, "1_U_E", true);
+                    break;
+                case "FM_FPC":
                     TItem.Enable(oForm, "1_U_E", true);
                     break;
                     #endregion
