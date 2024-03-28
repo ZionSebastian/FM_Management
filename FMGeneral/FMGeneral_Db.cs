@@ -42,6 +42,10 @@ namespace FMGeneral
                     new B1DbTable("@FM_PBD1", "Production Budget Row", BoUTBTableType.bott_MasterDataLines),
                     new B1DbTable("@FM_OBCT", "Budget Category", BoUTBTableType.bott_MasterData),
                 #endregion
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> 8fd73a1b711844577e83b3e073d9a4124dc61fed
                 #region AP Debit Memo
                     new B1DbTable("@FM_ORPD", "AP Debit Memo", BoUTBTableType.bott_Document),
                     new B1DbTable("@FM_RPD1", "AP Debit Memo Row", BoUTBTableType.bott_DocumentLines),
@@ -152,6 +156,11 @@ namespace FMGeneral
 
 
                 #endregion
+<<<<<<< HEAD
+=======
+
+                   
+>>>>>>> 8fd73a1b711844577e83b3e073d9a4124dc61fed
                 #region AP Debit Memo
                    new B1DbColumn("@FM_ORPD", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    new B1DbColumn("@FM_ORPD", "DocDueDate", "Due Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -203,7 +212,11 @@ namespace FMGeneral
                    new B1DbColumn("@FM_RPD1", "Price", "Price", BoFieldTypes.db_Float, BoFldSubTypes.st_Price, 20, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                    
                 #endregion
+<<<<<<< HEAD
 
+=======
+                   
+>>>>>>> 8fd73a1b711844577e83b3e073d9a4124dc61fed
                 #region Bank Exchange Rate
 
                 new B1DbColumn("@FM_OBER", "DocDate", "Document Date", BoFieldTypes.db_Date, BoFldSubTypes.st_None, 0, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
@@ -228,6 +241,7 @@ namespace FMGeneral
                    new B1WizardBase.B1DbValidValue("N", "No")}, -1),
                 
                 #endregion
+<<<<<<< HEAD
 
                 #region FG Production Cost
 
@@ -240,6 +254,9 @@ namespace FMGeneral
                 
                 #endregion
 
+=======
+                
+>>>>>>> 8fd73a1b711844577e83b3e073d9a4124dc61fed
                 #region No-Object Tables
                    new B1DbColumn("@CCS_EPLSETT", "Values", "Settings Value", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 50, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 #endregion
@@ -268,7 +285,7 @@ namespace FMGeneral
                     new B1DbColumn("@FM_OBCT", "Category", "Category", BoFieldTypes.db_Alpha, BoFldSubTypes.st_None, 150, true, new B1WizardBase.B1DbValidValue[-1 + 1], -1),
                 #endregion
                
-
+                    
                 #endregion
             };
 
@@ -311,12 +328,16 @@ namespace FMGeneral
                                     "Code","Name"
                                               }),
                     #endregion
+<<<<<<< HEAD
                     #region FG Production Cost
                new B1Udo("FM_FPC","FG Production Cost", "FM_OFPC", new string[] {
                                      "FM_FPC1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
                                 BoYesNoEnum.tNO, BoYesNoEnum.tYES, BoYesNoEnum.tYES, null, new string[]{ "DocEntry","DocNum"}, new string[]{ "DocEntry","DocNum"}),
                     #endregion
 
+=======
+                    
+>>>>>>> 8fd73a1b711844577e83b3e073d9a4124dc61fed
                     #region AP Debit Memo
                      new B1Udo("FM_RPD","AP Debit Memo", "FM_ORPD", new string[] {
                                      "FM_RPD1"}, BoUDOObjType.boud_Document, BoYesNoEnum.tYES, BoYesNoEnum.tNO, BoYesNoEnum.tNO, BoYesNoEnum.tNO,
