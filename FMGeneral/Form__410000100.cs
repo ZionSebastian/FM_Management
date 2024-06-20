@@ -29,13 +29,13 @@ namespace FMGeneral
             // ADD YOUR ACTION CODE HERE ...
 
             form = B1Connections.theAppl.Forms.Item(pVal.FormUID);
-            SAPbouiCOM.EditText oEditDocEntry = (SAPbouiCOM.EditText)form.Items.Item("1000003").Specific;
+            //SAPbouiCOM.EditText oEditDocEntry = (SAPbouiCOM.EditText)form.Items.Item("1000003").Specific;
 
 
 
             if (globalvariables.CRSPrint)
             {
-
+                SAPbouiCOM.EditText oEditDocEntry = (SAPbouiCOM.EditText)form.Items.Item("1000003").Specific;
                 if (globalvariables.PrintType == "FM_EPL")
                 {
 

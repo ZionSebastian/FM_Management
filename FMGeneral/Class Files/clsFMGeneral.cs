@@ -33,6 +33,7 @@ namespace FMGeneral.Class_Files
             string sSQL = string.Empty;
             SAPbouiCOM.Matrix oMatrx;
             SAPbouiCOM.Matrix oMatrx1;
+
             SAPbouiCOM.Column oColType = default(SAPbouiCOM.Column);
             try
             {
@@ -79,14 +80,14 @@ namespace FMGeneral.Class_Files
 
                         oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("1_U_G").Specific;
                         SAPbobsCOM.Recordset oRS = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
-
+                        /*
                         string BankSQL = "select * from( select distinct CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN 'CASH IN HAND' ";
                         BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN 'BFA'  WHEN T1.AcctCode = '124202' THEN 'BIC' ";
                         BankSQL += "WHEN T1.AcctCode = '124204' THEN 'BPA' WHEN T1.AcctCode = '124205' OR T1.AcctCode = '124507' THEN 'BCGA' WHEN T1.AcctCode = '124206' OR T1.AcctCode = '124516' THEN 'SBA' ";
                         BankSQL += "WHEN T1.AcctCode = '124207' THEN 'BAI' WHEN T1.AcctCode = '124211' THEN 'BANCO VALOR' WHEN T1.AcctCode = '124213' THEN 'YETU'  ";
                         BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN 'BIR' WHEN T1.AcctCode = '124215'  THEN 'BCS' WHEN T1.AcctCode = '124216' THEN 'KEVE' WHEN T1.AcctCode = '124404' THEN 'BCI' ";
                         BankSQL += "WHEN T1.AcctCode='125216' THEN 'DEBIT CARD-02-MEDICAL USE' WHEN T1.AcctCode='125217' THEN 'DEBIT CARD-03-OPERATION USE' WHEN T1.AcctCode='125218' THEN 'DEBIT CARD-04-OFFICE USE' ";
-                        BankSQL += "WHEN T1.AcctCode = '125219' THEN 'DEBIT CARD-15.001 BENGUELA' WHEN T1.AcctCode = '125220' THEN 'DEBIT CARD-15.002 OFFICE' WHEN T1.AcctCode = '124510' THEN 'BFA SHORT TERM LOAN-OD FACILTY' WHEN T1.AcctCode = '124514' THEN 'CAIXA SHORT TERM LOAN-OD FACILTY'  WHEN T1.AcctCode='124519' THEN 'CAIXA RESERVE' WHEN T1.AcctCode ='124522' THEN 'Banco VLR - Kz : 91001840001 (OD)' END AS[AccountName] ";
+                        BankSQL += "WHEN T1.AcctCode = '125219' THEN 'DEBIT CARD-15.001 BENGUELA' WHEN T1.AcctCode = '125220' THEN 'DEBIT CARD-15.002 OFFICE' WHEN T1.AcctCode = '124510' THEN 'BFA SHORT TERM LOAN-OD FACILTY' WHEN T1.AcctCode = '124514' THEN 'CAIXA SHORT TERM LOAN-OD FACILTY'  WHEN T1.AcctCode='124519' THEN 'CAIXA RESERVE' WHEN T1.AcctCode ='124522' THEN 'Banco VLR - Kz : 91001840001 (OD)' WHEN T1.AcctCode ='124523' or T1.AcctCode ='124217' THEN 'Access Bank' END AS[AccountName] ";
 
                         BankSQL += ",CASE WHEN T1.AcctCode='124101' OR T1.AcctCode= '124102' OR T1.AcctCode= '124104' THEN '1' ";
                         BankSQL += "WHEN T1.AcctCode = '124201' OR T1.AcctCode = '124500' OR T1.AcctCode = '124708' THEN '2'  WHEN T1.AcctCode = '124202' THEN '3' ";
@@ -94,9 +95,12 @@ namespace FMGeneral.Class_Files
                         BankSQL += "WHEN T1.AcctCode = '124207' THEN '7' WHEN T1.AcctCode = '124211' THEN '8' WHEN T1.AcctCode = '124213' THEN '9'  ";
                         BankSQL += "WHEN T1.AcctCode = '124214' OR T1.AcctCode = '124521' THEN '10' WHEN T1.AcctCode = '124215'  THEN '11' WHEN T1.AcctCode = '124216' THEN '12' WHEN T1.AcctCode = '124404' THEN '13' ";
                         BankSQL += "WHEN T1.AcctCode='125216' THEN '14' WHEN T1.AcctCode='125217' THEN '15' WHEN T1.AcctCode='125218' THEN '16' ";
-                        BankSQL += "WHEN T1.AcctCode = '125219' THEN '17' WHEN T1.AcctCode = '125220' THEN '18' WHEN T1.AcctCode = '124510' THEN '19' WHEN T1.AcctCode = '124514' THEN '20'  WHEN T1.AcctCode='124519' THEN '21' WHEN T1.AcctCode='124522' THEN '22'  END AS[AccountOrder] ";
+                        BankSQL += "WHEN T1.AcctCode = '125219' THEN '17' WHEN T1.AcctCode = '125220' THEN '18' WHEN T1.AcctCode = '124510' THEN '19' WHEN T1.AcctCode = '124514' THEN '20'  WHEN T1.AcctCode='124519' THEN '21' WHEN T1.AcctCode='124522' THEN '22' WHEN T1.AcctCode ='124523' or T1.AcctCode ='124217'  THEN '23'  END AS[AccountOrder] ";
 
-                        BankSQL += " FROM OACT T1 WHERE T1.AcctCode in ('124101', '124201', '124202', '124204', '124205', '124206', '124207', '124211', '124404', '124213', '124214', '124215', '124216', '124102', '124500', '124507', '124516', '124521', '124104', '124708','125216','125217','125218','125219','125220', '124510', '124514', '124519','124522') )A order by cast([AccountOrder] as numeric)";
+                        BankSQL += " FROM OACT T1 WHERE T1.AcctCode in ('124101', '124201', '124202', '124204', '124205', '124206', '124207', '124211', '124404', '124213', '124214', '124215', '124216', '124102', '124500', '124507', '124516', '124521', '124104', '124708','125216','125217','125218','125219','125220', '124510', '124514', '124519','124522','124523','124217') )A order by cast([AccountOrder] as numeric)";
+                        
+    */
+                        string BankSQL = "select U_AcctName [AccountName] from [@CCS_DSBSETT] ORDER BY CAST (Code AS int) ASC";
                         oRS = TSQL.GetRecords(BankSQL);
 
                         oMatrx1.FlushToDataSource();
@@ -417,9 +421,94 @@ namespace FMGeneral.Class_Files
 
                         break;
 
+                    #endregion
+
+                    #region SBL
+
+                    case "FM_SBL":
+                        var _withSBL = _form.DataSources.DBDataSources.Item("@FM_OSBL");
+                        var _withSBL1 = _form.DataSources.DBDataSources.Item("@FM_SBL1");
+                        var _withSBL2 = _form.DataSources.DBDataSources.Item("@FM_SBL2");
+                        var _withSBL3 = _form.DataSources.DBDataSources.Item("@FM_SBL3");
+                        var _withSBL4 = _form.DataSources.DBDataSources.Item("@FM_SBL4");
+                        var _withSBL5 = _form.DataSources.DBDataSources.Item("@FM_SBL5");
+
+                        oMatrx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+
+                        TComboBox.LoadSeries(_form, "Item_0", "FM_SBL");
+                        //@TABLE is the name of the DBDataSource the form's connect to 
+                        //_withBER.SetValue("Series", 0, TUser.GetDefaultSeriesBranch("FM_BER"));
+                        string series2 = TUser.GetDefaultSeries("FM_SBL", SeriesReturnType.Series);
+                        _withSBL.SetValue("Series", 0, TUser.GetDefaultSeries("FM_SBL", SeriesReturnType.Series));
+                        _withSBL.SetValue("DocNum", 0, Convert.ToString(TDocument.GetNextDocNo(_form, TUser.GetDefaultSeriesBranch("FM_SBL"))));
+                        _withSBL.SetValue("U_DocDate", 0, System.DateTime.Today.ToString("yyyyMMdd"));
+
+
+                        SAPbouiCOM.Matrix oMtx = (SAPbouiCOM.Matrix)_form.Items.Item("0_U_G").Specific;
+                        SAPbouiCOM.Matrix oMtx1 = (SAPbouiCOM.Matrix)_form.Items.Item("1_U_G").Specific;
+                        SAPbouiCOM.Matrix oMtx2 = (SAPbouiCOM.Matrix)_form.Items.Item("2_U_G").Specific;
+                        SAPbouiCOM.Matrix oMtx3 = (SAPbouiCOM.Matrix)_form.Items.Item("3_U_G").Specific;
+                        SAPbouiCOM.Matrix oMtx4 = (SAPbouiCOM.Matrix)_form.Items.Item("4_U_G").Specific;
+
+                        //oMatrx.FlushToDataSource();
+
+                        for (int i = 1; i < 2; i++)
+                        {
+                            oMtx.FlushToDataSource();
+                            TMatrix.addRow(_form, "0_U_G", "#", "@FM_SBL1");
+                            TMatrix.RefreshRowNo(_form, "0_U_G", "#");
+                            oMtx.LoadFromDataSource();
+
+                            oMtx1.FlushToDataSource();
+                            TMatrix.addRow(_form, "1_U_G", "#", "@FM_SBL2");
+                            TMatrix.RefreshRowNo(_form, "1_U_G", "#");
+                            oMtx1.LoadFromDataSource();
+
+                            oMtx2.FlushToDataSource();
+                            TMatrix.addRow(_form, "2_U_G", "#", "@FM_SBL3");
+                            TMatrix.RefreshRowNo(_form, "2_U_G", "#");
+                            oMtx2.LoadFromDataSource();
+
+                            oMtx3.FlushToDataSource();
+                            TMatrix.addRow(_form, "3_U_G", "#", "@FM_SBL4");
+                            TMatrix.RefreshRowNo(_form, "3_U_G", "#");
+                            oMtx3.LoadFromDataSource();
+
+                            oMtx4.FlushToDataSource();
+                            TMatrix.addRow(_form, "4_U_G", "#", "@FM_SBL5");
+                            TMatrix.RefreshRowNo(_form, "4_U_G", "#");
+                            oMtx4.LoadFromDataSource();
+
+                        }
+
+
+                        //oMatrx1 = (SAPbouiCOM.Matrix)_form.Items.Item("1_U_G").Specific;
+                        //SAPbobsCOM.Recordset oRS2 = (SAPbobsCOM.Recordset)B1Connections.diCompany.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+                        //string rawMtrlSQL = "select U_AcctName [AccountName] from [@CCS_DSBSETT] ORDER BY CAST (Code AS int) ASC";
+                        //oRS = TSQL.GetRecords(rawMtrlSQL);
+
+                        //oMatrx1.FlushToDataSource();
+                        //oRS.MoveFirst();
+                        //for (int i = 0; i < oRS.RecordCount; i++)
+                        //{
+
+                        //    TMatrix.addRow(_form, "1_U_G", "#", "@FM_BER2");
+                        //    TMatrix.RefreshRowNo(_form, "1_U_G", "#");
+
+                        //    string AccountName = oRS.Fields.Item("AccountName").Value.ToString().Trim();
+                        //    _withBER2.SetValue("U_Bank", i, AccountName);
+                        //    //_withBER2.SetValue("U_Bank", i, "MM");
+
+                        //    oMatrx1.LoadFromDataSource();
+                        //    oRS.MoveNext();
+                        //}
+
+
+                        break;
                         #endregion
 
-#endregion
+                        #endregion
                 }
             }
             catch (Exception ex)
@@ -440,6 +529,9 @@ namespace FMGeneral.Class_Files
                     TItem.Enable(oForm, "1_U_E", true);
                     break;
                 case "FM_FPC":
+                    TItem.Enable(oForm, "1_U_E", true);
+                    break;
+                case "FM_SBL":
                     TItem.Enable(oForm, "1_U_E", true);
                     break;
                     #endregion

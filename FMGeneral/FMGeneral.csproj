@@ -93,6 +93,7 @@
     <Compile Include="Button__FM_RPD__1.cs" />
     <Compile Include="Button__FM_RPD__btnJEGen.cs" />
     <Compile Include="Button__FM_RPD__btnPrint.cs" />
+    <Compile Include="Button__FM_SBL__1.cs" />
     <Compile Include="Class Files\clsFMGeneral.cs" />
     <Compile Include="Class Files\globalvariables.cs" />
     <Compile Include="ComboBox__FM_MHF__11_U_Cb.cs" />
@@ -112,8 +113,8 @@
     <Compile Include="EditText__FM_MHF__txtWTCode.cs" />
     <Compile Include="EditText__FM_RPD__txtCrdCod.cs" />
     <Compile Include="EditText__FM_RPD__txtPayTrm.cs" />
-    <Compile Include="FMGeneral_Db.cs" />
     <Compile Include="FMGeneral_Cockpits.cs" />
+    <Compile Include="FMGeneral_Db.cs" />
     <Compile Include="Form__140.cs" />
     <Compile Include="Form__410000100.cs" />
     <Compile Include="Form__42.cs" />
@@ -130,10 +131,16 @@
     <Compile Include="Matrix__FM_PRD__1_U_G.cs" />
     <Compile Include="Matrix__FM_PRD__2_U_G.cs" />
     <Compile Include="Matrix__FM_RPD__0_U_G.cs" />
+    <Compile Include="Matrix__FM_SBL__0_U_G.cs" />
+    <Compile Include="Matrix__FM_SBL__1_U_G.cs" />
+    <Compile Include="Matrix__FM_SBL__2_U_G.cs" />
+    <Compile Include="Matrix__FM_SBL__3_U_G.cs" />
+    <Compile Include="Matrix__FM_SBL__4_U_G.cs" />
     <Compile Include="Menu__1281.cs" />
     <Compile Include="Menu__1282.cs" />
     <Compile Include="Menu__1292.cs" />
     <Compile Include="Menu__1293.cs" />
+    <Compile Include="Menu__mnuSBL.cs" />
     <Compile Include="Menu__mnuBER.cs" />
     <Compile Include="Menu__mnuEPL.cs" />
     <Compile Include="Menu__mnuFPC.cs" />

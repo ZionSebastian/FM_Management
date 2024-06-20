@@ -103,6 +103,36 @@ namespace FMGeneral
                         return false;
                         break;
 
+                    case "FM_SBL":
+                        oForm.Freeze(true);
+                        if (oForm.PaneLevel == 1)
+                        {
+                            TMatrix.addRow(oForm, "0_U_G", "#", "@FM_SBL1");
+                            TMatrix.RefreshRowNo(oForm, "0_U_G", "#");
+                        }
+                        if (oForm.PaneLevel == 2)
+                        {
+                            TMatrix.addRow(oForm, "1_U_G", "#", "@FM_SBL2");
+                            TMatrix.RefreshRowNo(oForm, "1_U_G", "#");
+                        }
+                        if (oForm.PaneLevel == 3)
+                        {
+                            TMatrix.addRow(oForm, "2_U_G", "#", "@FM_SBL3");
+                            TMatrix.RefreshRowNo(oForm, "2_U_G", "#");
+                        }
+                        if (oForm.PaneLevel == 4)
+                        {
+                            TMatrix.addRow(oForm, "3_U_G", "#", "@FM_SBL4");
+                            TMatrix.RefreshRowNo(oForm, "3_U_G", "#");
+                        }
+                        if (oForm.PaneLevel == 5)
+                        {
+                            TMatrix.addRow(oForm, "4_U_G", "#", "@FM_SBL5");
+                            TMatrix.RefreshRowNo(oForm, "4_U_G", "#");
+                        }
+                        oForm.Freeze(false);
+                        return false;
+                        break;
 
                     case "FM_PRD":
                         oForm.Freeze(true);
@@ -148,8 +178,6 @@ namespace FMGeneral
                         {
                             TMatrix.addRow(oForm, "0_U_G", "#", "@FM_FPC1");
                             TMatrix.RefreshRowNo(oForm, "0_U_G", "#");
-
-
                         }
                         oForm.Freeze(false);
                         return false;
